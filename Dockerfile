@@ -26,7 +26,7 @@ tar -xf distribution-karaf-0.2.0-Helium.tar.gz -C opendaylight --strip-component
 rm -rf distribution-karaf-0.2.0-Helium.tar.gz
 
 # Download and run the maven build information, then clean up after it to save space.
-WORKDIR /opt/odl/maven
+WORKDIR /opt/odl/maven/opendaylight
 RUN git clone https://github.com/opendaylight/integration.git && \
 cd integration && \
 mvn install && \
