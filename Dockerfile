@@ -4,8 +4,11 @@
 FROM debian:7
 MAINTAINER Not the OpenDaylight Project <sam@cygnus>
 
+
+# RUN apt-get update && apt-get install -qy openjdk-7-jre-headless wget git maven && \
+
 # Install required software (?MB)
-RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget git maven && \
+RUN apt-get install -qy --no-install-recommends openjdk-7-jdk wget git maven && \
     mkdir /opt/odl && \
     mkdir /opt/odl/karaf && \
     mkdir /opt/odl/karaf/opendaylight && \
