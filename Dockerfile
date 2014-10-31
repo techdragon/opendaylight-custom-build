@@ -30,8 +30,8 @@ WORKDIR /opt/odl/maven/opendaylight
 RUN git clone https://github.com/opendaylight/integration.git && \
 cd integration && \
 mvn install && \
-cp /opt/odl/maven/distibutions/base/target/distibutions-base-* /opt/odl/maven/builds && \
-cp /opt/odl/maven/distibutions/virtualization/target/distributions-virtualization-* /opt/odl/maven/builds && \
+cp /opt/odl/maven/distributions/base/target/distibutions-base-* /opt/odl/maven/builds && \
+cp /opt/odl/maven/distributions/virtualization/target/distributions-virtualization-* /opt/odl/maven/builds && \
 git clean -qfdx
 
 
