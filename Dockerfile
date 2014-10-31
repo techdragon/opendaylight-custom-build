@@ -12,6 +12,7 @@ RUN apt-get update && \
 apt-get install -qy --no-install-recommends openjdk-7-jdk wget git maven && \
 mkdir /opt/odl && \
 mkdir /opt/odl/karaf && \
+mkdir /opt/odl/maven && \
 mkdir /opt/odl/karaf/opendaylight && \
 mkdir /opt/odl/maven/opendaylight && \
 mkdir /opt/odl/maven/builds
