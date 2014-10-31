@@ -5,22 +5,25 @@ FROM debian:7
 MAINTAINER Not the OpenDaylight Project <sam@cygnus>
 
 # Install required software (?MB)
-RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget git maven
+RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget git maven && \
+    mkdir /opt/odl && \
+    mkdir /opt/odl/karaf && \
+    mkdir /opt/odl/karaf/opendaylight && \
+    mkdir /opt/odl/maven
 
-# Download and install ODL
-
-## Create directories
-RUN mkdir /opt/odl && mkdir /opt/odl/karaf && mkdir /opt/odl/karaf/opendaylight && mkdir /opt/odl/maven
+# Download and install the ODL Karaf base
 WORKDIR /opt/odl/karaf
 
 # Doing all of these in one step reduces the resulting image size by 229MB
-
 RUN wget -q "http://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.0-Helium/distribution-karaf-0.2.0-Helium.tar.gz" && \
     tar -xf distribution-karaf-0.2.0-Helium.tar.gz -C opendaylight --strip-components=1 && \
         rm -rf distribution-karaf-0.2.0-Helium.tar.gz
 
+# Download and run the maven build information.
 WORKDIR /opt/odl/maven
-RUN git clone https://github.com/opendaylight/integration.git && cd integration && mvn install
+RUN git clone https://github.com/opendaylight/integration.git && \
+    cd integration && \
+    mvn install
 
 
         # TODO: Verify that these are all of the ODL Helium ports and no extra
