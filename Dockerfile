@@ -9,7 +9,7 @@ MAINTAINER Not the OpenDaylight Project <sam@cygnus>
 
 # Install required software (?MB)
 RUN apt-get update && \
-apt-get install -qy --no-install-recommends openjdk-7-jdk wget git maven && \
+apt-get install -qy --no-install-recommends openjdk-7-jdk wget rsync git maven && \
 mkdir /opt/odl && \
 mkdir /opt/odl/karaf && \
 mkdir /opt/odl/maven && \
@@ -30,10 +30,9 @@ WORKDIR /opt/odl/maven/opendaylight
 RUN git clone https://github.com/opendaylight/integration.git && \
 cd integration && \
 mvn install && \
-cp /opt/odl/maven/distributions/base/target/distributions-base-* /opt/odl/maven/builds && \
-cp /opt/odl/maven/distributions/virtualization/target/distributions-virtualization-* /opt/odl/maven/builds && \
+rsync -a /opt/odl/maven/distributions/base/target/distributions-base-* /opt/odl/maven/builds && \
+rsync -a /opt/odl/maven/distributions/virtualization/target/distributions-virtualization-* /opt/odl/maven/builds && \
 git clean -qfdx
-
 
 
 # TODO: Verify that these are all of the ODL Helium ports and no extra
